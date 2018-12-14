@@ -8,20 +8,23 @@ import {producto} from '../interfaces/producto.interfaces';
 export class ProductosService {
 cargando=true;
 productos:producto[] = [];
-
-
   constructor(private http: HttpClient) { 
     this.cargarproductos();
 
   }
 
-
   private cargarproductos(){
     this.http.get('https://portafolio-7367f.firebaseio.com/productos_idx.json')
     .subscribe( (resp: producto [])=>{
-console.log(resp);
+
 this.productos=resp;
 this.cargando=false;
     });
   }
+getProducto(id:string){
+  return this.http.get(`https://portafolio-7367f.firebaseio.com/productos/${id}.json`);
+
+}
+
+
 }
